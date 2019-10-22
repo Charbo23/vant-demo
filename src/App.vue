@@ -1,10 +1,19 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div class="main-content">
+      <div id="nav"></div>
+      <router-view />
     </div>
-    <router-view />
+    <van-tabbar route>
+      <van-tabbar-item replace to="/" icon="wap-home-o">
+        首页
+        <template #icon="{active}"><van-icon :name="active?'wap-home':'wap-home-o'" /></template>
+      </van-tabbar-item>
+      <van-tabbar-item replace to="/about" icon="info-o">
+      关于
+       <template #icon="{active}"><van-icon :name="active?'info':'info-o'" /></template>
+      </van-tabbar-item>
+    </van-tabbar>
   </div>
 </template>
 
@@ -28,5 +37,11 @@
       color: #42b983;
     }
   }
+}
+.main-content {
+  padding-bottom: 50px;
+}
+.van-tabbar-item {
+  cursor: pointer;
 }
 </style>
