@@ -2,22 +2,30 @@
   <div id="app">
     <div class="main-content">
       <div id="nav"></div>
-      <router-view />
+      <transition name="fade" mode="out-in">
+        <keep-alive include="About,Home">
+          <router-view />
+        </keep-alive>
+      </transition>
     </div>
-    <van-tabbar route>
-      <van-tabbar-item replace to="/" icon="wap-home-o">
-        首页
-        <template #icon="{active}"><van-icon :name="active?'wap-home':'wap-home-o'" /></template>
-      </van-tabbar-item>
-      <van-tabbar-item replace to="/about" icon="info-o">
-      关于
-       <template #icon="{active}"><van-icon :name="active?'info':'info-o'" /></template>
-      </van-tabbar-item>
-    </van-tabbar>
+    <main-tabbar/>
   </div>
 </template>
+<script>
+import MainTabbar from "@/components/MainTabbar.vue";
 
+export default {
+  name: "App",
+  components: {
+     MainTabbar
+  }
+};
+</script>
 <style lang="scss">
+body {
+  // 加入动画需禁止横向滚动条
+  overflow-x: hidden;
+}
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -39,9 +47,24 @@
   }
 }
 .main-content {
-  padding-bottom: 50px;
+  padding-bottom: 60px;
 }
 .van-tabbar-item {
   cursor: pointer;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-enter {
+  transform: translateX(50px);
+}
+.fade-leave-to {
+  transform: translateX(-50px);
 }
 </style>
