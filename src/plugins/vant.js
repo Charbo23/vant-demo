@@ -5,7 +5,11 @@ import {
   TabbarItem,
   Icon,
   Rate,
-  NavBar
+  NavBar,
+  Notify,
+  Dialog,
+  List ,
+  Cell
 } from "vant";
 
 
@@ -15,6 +19,14 @@ Vue.use(Tabbar)
 Vue.use(TabbarItem);
 Vue.use(Rate);
 Vue.use(NavBar);
+Vue.use(Notify);
+Vue.use(Dialog);
+Vue.use(List);
+Vue.use(Cell);
+
+
+
+
 
 
 

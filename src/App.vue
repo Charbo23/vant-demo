@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <van-nav-bar :title="$store.state.navTitle"></van-nav-bar>
+    <van-nav-bar :title="navTitle"></van-nav-bar>
+    <!-- <van-nav-bar :title="getFullTitle(navTitle)"></van-nav-bar> -->
     <div class="main-content">
       <!-- <transition name="fade" mode="out-in"> -->
       <keep-alive include="About,Home">
@@ -13,11 +14,19 @@
 </template>
 <script>
 import MainTabbar from "@/components/MainTabbar.vue";
+import { mapState,mapGetters } from "vuex";
 
 export default {
   name: "App",
   components: {
     MainTabbar
+  },
+  data() {
+    return {};
+  },
+  computed: {
+    ...mapGetters(['getFullTitle']),
+    ...mapState(['navTitle'])
   }
 };
 </script>
@@ -33,13 +42,21 @@ body {
   text-align: center;
   color: #2c3e50;
 }
-.ri {
+.btn-icon {
+  display: inline-block;
+  min-width: 1em;
+  font-size: 1.2em;
+  line-height: inherit;
+  vertical-align: middle;
+  padding-bottom: 0.2em;
+  & + span {
     display: inline-block;
-    min-width: 1em;
-    font-size: 1.3em;
-    line-height: inherit;
-    vertical-align: top;
- }
+    margin-left: 5px;
+  }
+  &.van-icon {
+    font-size: 16.8px;
+  }
+}
 #nav {
   padding: 30px;
 

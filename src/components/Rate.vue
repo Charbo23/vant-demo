@@ -1,36 +1,50 @@
 <template>
   <div class="rate">
     <van-rate
-      :count="$store.state.limit"
+      :count="limit"
       size="2rem"
-      v-model="$store.state.rate"
+      v-model="rate"
       allow-half
       void-icon="star"
       void-color="#eee"
     />
     <div :class="$style['btn-group']">
-      <van-button type="info" @click="onClickAdd">
-        <i class="ri ri-add-line"></i>
+      <van-button :class="$style['van-button']" type="info" @click="onClickAdd">
+        <i class="btn-icon ri-add-line"></i>
       </van-button>
-      <van-button type="info" @click="onClickSubtract">
-        <i class="ri ri-subtract-line"></i>
+      <van-button :class="$style['van-button']" type="info" @click="onClickSubtract">
+        <i class="btn-icon ri-subtract-line"></i>
       </van-button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapMutations, mapState, mapActions } from "vuex";
+
 export default {
   name: "Rate",
   data() {
     return {};
   },
+  computed: {
+    ...mapState({ limit: "limit", vuex_rate: "rate" }),
+    rate: {
+      get() {
+        return this.vuex_rate;
+      },
+      set(value) {
+        this.changeRate({ value });
+      }
+    }
+  },
   methods: {
+    ...mapMutations(["changeRate"]),
     onClickAdd() {
-      this.$store.commit("increaseRate");
+      this.changeRate({ diff: 1 });
     },
     onClickSubtract() {
-      this.$store.commit("decreaseRate");
+      this.changeRate({ diff: -1 });
     }
   }
 };
@@ -39,10 +53,8 @@ export default {
 <style lang="scss" module>
 .btn-group {
   margin-top: 10px;
-}
-:global(.van-button) {
-  & + & {
-    margin-left: 10px;
+  .van-button + .van-button {
+    margin-left: 20px;
   }
 }
 </style>
