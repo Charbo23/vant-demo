@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
 const About = () => import('@/views/About.vue');
+const Test = () => import('@/views/Test.vue');
 
 const routes = [
   {
@@ -16,7 +17,7 @@ const routes = [
     name: "home",
     component: Home,
     meta:{
-      title:'Home'
+      title:'首页'
     }
   },
   {
@@ -24,7 +25,15 @@ const routes = [
     name: "about",
     component: About,
     meta:{
-      title:'About'
+      title:'关于'
+    }
+  },
+  {
+    path: "/test",
+    name: "test",
+    component: Test,
+    meta:{
+      title:'测试'
     }
   }
 ];

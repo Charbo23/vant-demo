@@ -1,14 +1,14 @@
 <template>
   <div id="app">
+    <van-nav-bar :title="$store.state.navTitle"></van-nav-bar>
     <div class="main-content">
-      <div id="nav"></div>
-      <transition name="fade" mode="out-in">
-        <keep-alive include="About,Home">
-          <router-view />
-        </keep-alive>
-      </transition>
+      <!-- <transition name="fade" mode="out-in"> -->
+      <keep-alive include="About,Home">
+        <router-view />
+      </keep-alive>
+      <!-- </transition> -->
     </div>
-    <main-tabbar/>
+    <main-tabbar />
   </div>
 </template>
 <script>
@@ -17,7 +17,7 @@ import MainTabbar from "@/components/MainTabbar.vue";
 export default {
   name: "App",
   components: {
-     MainTabbar
+    MainTabbar
   }
 };
 </script>
@@ -33,7 +33,13 @@ body {
   text-align: center;
   color: #2c3e50;
 }
-
+.ri {
+    display: inline-block;
+    min-width: 1em;
+    font-size: 1.3em;
+    line-height: inherit;
+    vertical-align: top;
+ }
 #nav {
   padding: 30px;
 
@@ -47,7 +53,7 @@ body {
   }
 }
 .main-content {
-  padding-bottom: 60px;
+  padding: 10px 0 60px;
 }
 .van-tabbar-item {
   cursor: pointer;
