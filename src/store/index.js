@@ -1,8 +1,10 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import _ from 'lodash';
-import { Map, t } from 'immutable';
+import { Map } from 'immutable';
+import { CHANGE_RATE } from './mutation-types';
 Vue.use(Vuex);
+const addressArr = ['From action', '湖州师范学院'];
 
 export default new Vuex.Store({
   state: {
@@ -14,10 +16,11 @@ export default new Vuex.Store({
     info: Map({
       name: 'Charbo',
       age: '21'
-    })
+    }),
+    addressIndex: 0
   },
   mutations: {
-    changeRate(state, { diff, value, type } = {}) {
+    [CHANGE_RATE](state, { diff, value } = {}) {
       diff && (diff = _.toNumber(diff));
       value && (value = _.toNumber(value));
       const temp = !isNaN(value) ? value : state.rate + (!isNaN(diff) ? diff : 0);
@@ -29,9 +32,13 @@ export default new Vuex.Store({
     setUserList(state, userList) {
       state.userList = userList;
     },
-    updateInfo(state) {
-      // console.log(state.info);
-      state.info = state.info.set('address', '湖州师范学院').delete('name');
+    updateInfo(state, { address } = {}) {
+      state.info = state.info
+        .set('address', address || '湖州师范学院')
+        .delete('name');
+    },
+    switchAddressIndex(state) {
+      state.addressIndex = (state.addressIndex + 1) % addressArr.length;
     }
   },
   getters: {
@@ -49,6 +56,16 @@ export default new Vuex.Store({
       return JSON.stringify(state.info);
     }
   },
-  actions: {},
+  actions: {
+    updateInfoAction({ commit, state }) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          commit('updateInfo', { address: addressArr[state.addressIndex] });
+          commit('switchAddressIndex')
+          resolve('done')
+        }, 1000);
+      })
+    }
+  },
   modules: {},
 });

@@ -8,8 +8,9 @@ import {
   NavBar,
   Notify,
   Dialog,
-  List ,
-  Cell
+  List,
+  Cell,
+  Toast
 } from "vant";
 
 
@@ -23,6 +24,7 @@ Vue.use(Notify);
 Vue.use(Dialog);
 Vue.use(List);
 Vue.use(Cell);
+Vue.use(Toast);
 
 
 

@@ -3,11 +3,11 @@
     <van-nav-bar :title="navTitle"></van-nav-bar>
     <!-- <van-nav-bar :title="getFullTitle(navTitle)"></van-nav-bar> -->
     <div class="main-content">
-      <!-- <transition name="fade" mode="out-in"> -->
+      <transition name="fade" mode="out-in">
       <keep-alive include="About,Home">
         <router-view />
       </keep-alive>
-      <!-- </transition> -->
+      </transition>
     </div>
     <main-tabbar />
   </div>
@@ -78,16 +78,16 @@ body {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 0.5s;
+  transition: all 0.3s;
 }
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
 }
 .fade-enter {
-  transform: translateX(50px);
+  transform: translateX(30px);
 }
 .fade-leave-to {
-  transform: translateX(-50px);
+  transform: translateX(-30px);
 }
 </style>

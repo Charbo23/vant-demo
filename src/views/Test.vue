@@ -20,10 +20,10 @@
     </div>
     <van-dialog v-model="isShow" title="标题" show-cancel-button>
       <van-list>
-        <h4 v-if="getUserListLength(0,5)===0">暂无信息</h4>
+        <h4 v-if="userListLength===0">暂无信息</h4>
         <van-cell
           v-else
-          v-for="item in getUserListByRange(0,5)"
+          v-for="item in userList"
           :key="item.id"
           :title="`${item.id}. ${item.name}`"
         ></van-cell>
@@ -52,23 +52,31 @@ export default {
   },
   computed: {
     ...mapGetters(["getUserListByRange", "getUserListLength", "getInfoText"]),
-    ...mapState(["test", "info", "rate"])
+    ...mapState(["test", "info", "rate"]),
+    userList() {
+      return this.getUserListByRange(0, 6);
+    },
+    userListLength() {
+      return this.getUserListLength(0, 6);
+    }
   },
   methods: {
     ...mapMutations(["setUserList", "updateInfo"]),
+    ...mapActions(["updateInfoAction"]),
     startAnime() {
       anime({
         targets: `h2.${this.$style["text-zone"]}`,
-        // translateX: 250,
         scale: 1.6,
         duration: 800,
         direction: "alternate"
         //  delay:300,
         //  loop:true
-      });
+      }).finished.then(() => {});
     },
-    onClickUpdate() {
-      this.updateInfo();
+    async onClickUpdate() {
+      this.$toast.loading({ message: "加载中...", forbidClick: true });
+      const res = await this.updateInfoAction();
+      this.$toast.success(res);
     },
     onClickShow() {
       this.isShow = true;
