@@ -3,9 +3,26 @@ import Vuex from "vuex";
 import _ from 'lodash';
 import { Map } from 'immutable';
 import { CHANGE_RATE } from './mutation-types';
-Vue.use(Vuex);
-const addressArr = ['From action', '湖州师范学院'];
 
+Vue.use(Vuex);
+
+const addressArr = ['From action', '湖州师范学院'];
+const moduleA = {
+  //命名空间影响除state外的属性（state本身已经区分命名空间），使得他们需要以路径方式访问
+  namespaced: true,
+  state: {
+    maTitle: 'Title From ModuleA'
+  },
+  mutations: {
+
+  },
+  getters: {
+
+  },
+  actions: {
+
+  }
+}
 export default new Vuex.Store({
   state: {
     test: 'Testing from Vuex',
@@ -67,5 +84,9 @@ export default new Vuex.Store({
       })
     }
   },
-  modules: {},
+  modules: {
+    moduleA
+  },
 });
+
+

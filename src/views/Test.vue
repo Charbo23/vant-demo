@@ -1,6 +1,6 @@
 <template>
   <div class="test">
-    <h2 :class="$style['text-zone']" @click="startAnime">{{test}}</h2>
+    <h2 :class="$style['text-zone']" @click="startAnime">{{maTitle}}</h2>
     <div :class="$style['test-zone']">
       {{getInfoText}}
       <van-button type="info" size="small" icon="replay" @click="onClickUpdate">Update</van-button>
@@ -53,6 +53,8 @@ export default {
   computed: {
     ...mapGetters(["getUserListByRange", "getUserListLength", "getInfoText"]),
     ...mapState(["test", "info", "rate"]),
+    ...mapState('moduleA',['maTitle']),
+    // ...mapState({ maTitle: state => state.moduleA.maTitle }),
     userList() {
       return this.getUserListByRange(0, 6);
     },
