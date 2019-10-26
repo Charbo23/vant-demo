@@ -1,6 +1,6 @@
 <template>
   <div class="test">
-    <h2 class="text-zone">{{test}}</h2>
+    <h2 :class="$style['text-zone']" @click="startAnime">{{test}}</h2>
     <div :class="$style['test-zone']">
       {{getInfoText}}
       <van-button type="info" size="small" icon="replay" @click="onClickUpdate">Update</van-button>
@@ -36,6 +36,7 @@
 import { mapGetters, mapMutations, mapState, mapActions } from "vuex";
 import Rate from "@/components/Rate.vue";
 import axios from "axios";
+import anime from "animejs";
 
 export default {
   name: "Test",
@@ -55,6 +56,17 @@ export default {
   },
   methods: {
     ...mapMutations(["setUserList", "updateInfo"]),
+    startAnime() {
+      anime({
+        targets: `h2.${this.$style["text-zone"]}`,
+        // translateX: 250,
+        scale: 1.6,
+        duration: 800,
+        direction: "alternate"
+        //  delay:300,
+        //  loop:true
+      });
+    },
     onClickUpdate() {
       this.updateInfo();
     },
@@ -84,6 +96,9 @@ export default {
 </script>
 
 <style lang="scss" module>
+.text-zone {
+  cursor: pointer;
+}
 .test-zone {
   & + & {
     margin-top: 20px;
