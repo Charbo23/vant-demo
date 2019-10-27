@@ -23,12 +23,7 @@
 </template>
 
 <script>
-import axios from "axios";
-
-const myAxios = axios.create({
-  baseURL: "https://jsonplaceholder.typicode.com",
-  timeout: 5000,
-});
+import request, { createRequest, requestAll } from "@/network/request";
 
 export default {
   name: "Axios",
@@ -41,22 +36,26 @@ export default {
   methods: {
     async onClickRequest1() {
       this.isLoading1 = true;
-      const { data } = await myAxios.get("/posts");
-      this.isLoading1 = false;
-      this.$notify({
-        type: "success",
-        message: `${data.length} infos retrieved`
-      });
+      try {
+        const { data } = await request.get("/posts");
+        this.isLoading1 = false;
+        this.$notify({
+          type: "success",
+          message: `${data.length} infos retrieved`
+        });
+      } catch (error) {
+        throw error;
+      }
     },
     async onClickRequest2() {
       this.isLoading2 = true;
-      const resArr = await axios.all([
-        myAxios({
+      const resArr = await requestAll([
+        request({
           method: "GET",
           url: "/posts",
           params: { userId: 1 }
         }),
-        myAxios({
+        request({
           method: "GET",
           url: "/albums",
           params: { userId: 2 }
