@@ -13,6 +13,7 @@ const request = axios.create({
 request.interceptors.request.use((originConfig) => {
   return originConfig;
 }, (error) => {
+  // eslint-disable-next-line no-console
   console.log("Error occured on request");
   return Promise.reject(error);
 })
@@ -21,6 +22,7 @@ request.interceptors.request.use((originConfig) => {
 request.interceptors.response.use((res) => {
   return res;
 }, (error) => {
+  // eslint-disable-next-line no-console
   console.log("Error occured on response");
   return Promise.reject(error);
 })
