@@ -34,17 +34,17 @@ export default {
         return this.vuex_rate;
       },
       set(value) {
-        this.changeRate({ value });
+        this.setRateAction({ value });
       }
     }
   },
   methods: {
-    ...mapMutations(["changeRate"]),
+    ...mapActions(["setRateAction"]),
     onClickAdd() {
-      this.changeRate({ diff: 1 });
+      this.setRateAction({ diff: 1 });
     },
     onClickSubtract() {
-      this.changeRate({ diff: -1 });
+      this.setRateAction({ diff: -1 });
     }
   }
 };

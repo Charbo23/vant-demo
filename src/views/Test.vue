@@ -63,8 +63,8 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(["setUserList", "updateInfo"]),
-    ...mapActions(["updateInfoAction"]),
+    ...mapMutations(["setUserList", "setInfo"]),
+    ...mapActions(["setInfoAction"]),
     startAnime() {
       anime({
         targets: `h2.${this.$style["text-zone"]}`,
@@ -77,7 +77,7 @@ export default {
     },
     async onClickUpdate() {
       this.$toast.loading({ message: "加载中...", forbidClick: true });
-      const res = await this.updateInfoAction();
+      const res = await this.setInfoAction();
       this.$toast.success(res);
     },
     onClickShow() {
