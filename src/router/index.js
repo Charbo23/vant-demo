@@ -5,6 +5,7 @@ import Home from "../views/Home.vue";
 Vue.use(VueRouter);
 const About = () => import('@/views/About.vue');
 const Test = () => import('@/views/Test.vue');
+const Axios = () => import('@/views/Axios.vue');
 
 const routes = [
   {
@@ -18,6 +19,14 @@ const routes = [
     component: Home,
     meta:{
       title:'首页'
+    }
+  },
+  {
+    path: "/axios",
+    name: "axios",
+    component: Axios,
+    meta:{
+      title:'Axios测试'
     }
   },
   {

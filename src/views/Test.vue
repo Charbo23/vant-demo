@@ -97,7 +97,7 @@ export default {
       );
       this.$notify({
         type: "success",
-        message: `${userList.length} infos retrived`
+        message: `${userList.length} infos retrieved`
       });
       return userList;
     }

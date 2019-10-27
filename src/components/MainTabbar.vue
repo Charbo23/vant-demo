@@ -12,6 +12,12 @@
         <van-icon :name="active?'clock':'clock-o'" />
       </template>
     </van-tabbar-item>
+    <van-tabbar-item replace to="/axios">
+      Axios
+      <template #icon="{active}">
+        <van-icon class-prefix="ri" :name="active?'ie-fill':'ie-line'" />
+      </template>
+    </van-tabbar-item>
     <van-tabbar-item replace to="/about">
       关于
       <template #icon="{active}">

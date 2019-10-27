@@ -1,11 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import _ from 'lodash';
+import { Map } from 'immutable';
 import getters from './getters';
 import mutations from './mutations';
 import actions from './actions';
 import moduleA from './modules/moduleA';
-import { Map } from 'immutable';
 
 Vue.use(Vuex);
 
