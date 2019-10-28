@@ -1,6 +1,6 @@
 import * as types from './mutation-types';
 
-const actions =  {
+const actions = {
   setRateAction({ commit }, payload) {
     commit(types.SET_RATE, payload);
   },
@@ -12,6 +12,9 @@ const actions =  {
         resolve('done');
       }, 1000);
     })
+  },
+  setNavTitleAction({ commit }, payload) {
+    commit(types.SET_NAV_TITLE, payload);
   }
 }
 export default actions;
